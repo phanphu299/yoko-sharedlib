@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = AHI.Infrastructure.Service
+build_property.ProjectDir = /Users/phuphan/Yokogawa/Asset_Framework/shared-library/src/AHI.Infrastructure.Service/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

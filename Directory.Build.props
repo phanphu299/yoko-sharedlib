@@ -1,0 +1,43 @@
+<Project>
+
+  <!-- <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>preview</AnalysisLevel>
+    <NoWarn>$(NoWarn);CS1591;NU5118;NU5128</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <CodeAnalysisRuleset>CodeAnalysis.ruleset</CodeAnalysisRuleset>
+    <EnableXlfLocalization>false</EnableXlfLocalization>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+  </PropertyGroup> -->
+
+
+  <PropertyGroup>
+    <NetStandardTargetFrameworks Condition=" '$(NetStandardTargetFrameworks)' == '' ">
+      netstandard2.1
+    </NetStandardTargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>DXP Technical Team</Authors>
+    <Company>Yokogawa</Company>
+    <Product>Asset Health Insights</Product>
+    <Description>Yokogawa Asset Health Insights</Description>
+    <Copyright>© Yokogawa. All rights reserved.</Copyright>
+    <PackageIconFullPath>package-icon.png</PackageIconFullPath>
+    <PackageProjectUrl>https://dev.azure.com/AssetHealthInsights</PackageProjectUrl>
+    <!-- <PackageLicenseExpression>Yokogawa</PackageLicenseExpression> -->
+    <PackageTags>assethealthinsights;ahi;yokogawa</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://dev.azure.com/AssetHealthInsights</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>

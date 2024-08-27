@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(NetStandardTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AHI.Infrastructure.Repository\AHI.Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.UserContext\AHI.Infrastructure.UserContext.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.SystemContext\AHI.Infrastructure.SystemContext.csproj" />
+  </ItemGroup>
+
+</Project>

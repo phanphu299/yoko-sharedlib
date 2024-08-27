@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetStandardTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AHI.Infrastructure.Bus.RabbitMQ\AHI.Infrastructure.Bus.RabbitMQ.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.SystemContext\AHI.Infrastructure.SystemContext.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.UserContext\AHI.Infrastructure.UserContext.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.Exception\AHI.Infrastructure.Exception.csproj" />
+  </ItemGroup>
+
+</Project>

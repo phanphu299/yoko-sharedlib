@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(NetStandardTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AHI.Infrastructure.SharedKernel\AHI.Infrastructure.SharedKernel.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.OpenTelemetry\AHI.Infrastructure.OpenTelemetry.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.Cache.Redis\AHI.Infrastructure.Cache.Redis.csproj" />
+  </ItemGroup>
+
+</Project>

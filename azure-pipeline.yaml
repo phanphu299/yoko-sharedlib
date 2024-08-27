@@ -1,0 +1,120 @@
+trigger:
+  branches:
+    include:
+    - features/*/develop
+    - master
+
+pool:
+  name: 'DXP Hosted Function'
+
+parameters:
+  - name: ReleaseVersion
+    displayName: Build version
+    type: string
+    default: '2.1.5-rc58'
+
+variables:
+  serviceName: $(Build.DefinitionName)
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildSolution
+    steps:
+    - checkout: self
+      clean: true
+      fetchDepth: -1
+
+    - script: mono $(Agent.WorkFolder)/_tool/GitVersion/GitVersion.exe /output buildserver /nofetch
+      displayName: 'Fetch Version'
+    
+    - task: NuGetAuthenticate@1
+      inputs:
+        forceReinstallCredentialProvider: true
+
+    - task: Bash@3
+      displayName: 'Build Nuget'
+      inputs:
+        targetType: 'inline'
+        script: |
+          chmod o+rx ./build-nuget.sh
+          ./build-nuget.sh ${{ parameters.ReleaseVersion }}
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/outputs'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/outputs.zip'
+        replaceExistingArchive: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/outputs.zip'
+        ArtifactName: 'drop'
+- stage: Push
+  dependsOn: [Build]
+  condition: and(succeeded(), eq(variables.isMain, true))
+  jobs:
+  - deployment: PushStage
+    displayName: 'Push'
+    environment: Production
+  - job: Push
+    steps:
+    - task: NuGetAuthenticate@1
+      inputs:
+        forceReinstallCredentialProvider: true
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'specific'
+        itemPattern: '**/outputs.zip'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
+    - task: ExtractFiles@1
+      inputs:
+        archiveFilePatterns: '$(System.ArtifactsDirectory)/drop/outputs.zip'
+        destinationFolder: '$(System.DefaultWorkingDirectory)'
+        cleanDestinationFolder: false
+        overwriteExistingFiles: true
+    
+    - task: Bash@3
+      displayName: 'Push Nuget'
+      inputs:
+        targetType: 'inline'
+        script: |
+          chmod o+rx ./publish-nuget.sh
+          ./publish-nuget.sh
+
+- stage: PushDev
+  dependsOn: [Build]
+  condition: and(succeeded(), eq(variables.isMain, false))
+  jobs:
+  - deployment: PushStage
+    displayName: 'Push Dev'
+    environment: Development
+  - job: Push
+    steps:
+    - task: NuGetAuthenticate@1
+      inputs:
+        forceReinstallCredentialProvider: true
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'specific'
+        itemPattern: '**/outputs.zip'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
+    - task: ExtractFiles@1
+      inputs:
+        archiveFilePatterns: '$(System.ArtifactsDirectory)/drop/outputs.zip'
+        destinationFolder: '$(System.DefaultWorkingDirectory)'
+        cleanDestinationFolder: false
+        overwriteExistingFiles: true
+    
+    - task: Bash@3
+      displayName: 'Push Nuget'
+      inputs:
+        targetType: 'inline'
+        script: |
+          chmod o+rx ./publish-nuget.sh
+          ./publish-nuget.sh

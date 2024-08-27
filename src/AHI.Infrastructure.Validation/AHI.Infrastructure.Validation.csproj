@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFrameworks>$(NetStandardTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AHI.Infrastructure.Exception\AHI.Infrastructure.Exception.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.MultiTenancy\AHI.Infrastructure.MultiTenancy.csproj" />
+    <ProjectReference Include="..\AHI.Infrastructure.SystemContext\AHI.Infrastructure.SystemContext.csproj" />
+  </ItemGroup>
+</Project>

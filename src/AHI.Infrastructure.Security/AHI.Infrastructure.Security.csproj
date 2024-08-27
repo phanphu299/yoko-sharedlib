@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(NetStandardTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AHI.Infrastructure.SharedKernel\AHI.Infrastructure.SharedKernel.csproj" />
+  </ItemGroup>
+</Project>
